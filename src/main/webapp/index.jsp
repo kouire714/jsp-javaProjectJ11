@@ -6,14 +6,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>title</title>
+	<title>산아래서</title>
 	<jsp:include page="/include/bs4.jsp" />
 </head>
 <body>
 <jsp:include page="/include/header.jsp" />
 <p><br/></p>
 <div class="container">
-	<h2>길동이네집.....</h2>
 </div>
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />
