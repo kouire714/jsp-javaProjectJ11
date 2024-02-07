@@ -88,13 +88,6 @@ public class MemberController extends HttpServlet {
 			viewPage = "/include/message.jsp";
 		}
 		
-//		회원정보 페이지
-		else if(com.equals("/memberMain")) {
-			command = new MemberMainCommand();
-			command.execute(request, response);
-			viewPage += "/memberMain.jsp";
-		}
-		
 //		회원 정보 변경
 		else if(com.equals("/memberPwdCheck")) {
 			viewPage += "/memberPwdCheck.jsp";

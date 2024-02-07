@@ -72,7 +72,6 @@
 				<div class="dropdown">
 					<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">MyPage</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="memberMain.mem">myInfo</a>
 						<a class="dropdown-item" href="memberPwdCheck.mem">infoEdit</a>
 						<a class="dropdown-item" href="javascript:memberDelcheck()">leave</a>
 						<c:if test="${sLevel == 0}"><a class="dropdown-item" href="adminMain.ad">admin</a></c:if>

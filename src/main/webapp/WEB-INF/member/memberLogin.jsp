@@ -92,7 +92,6 @@
     }
     
     /* 비밀번호 찾기 */
-    /* *** */
     function passwordFind() {
     	let mid = $("#midSearch").val().trim();
     	let email = $("#emailSearch2").val().trim();

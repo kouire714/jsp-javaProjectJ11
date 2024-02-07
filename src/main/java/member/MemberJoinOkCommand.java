@@ -16,41 +16,15 @@ public class MemberJoinOkCommand implements MemberInterface {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/* 이미지 폴더 경로 및 크기, 형태 지정 */
-		String realPath = request.getServletContext().getRealPath("/images/member");
-		int maxSize = 1024 * 1024 * 5;
-		String encoding = "UTF-8";
-		
-		/* 요청 방식 및 옵션 설정 */
-		MultipartRequest multipartRequest = new MultipartRequest(request, realPath, maxSize, encoding, new DefaultFileRenamePolicy());
-		
-		/* 수정한 사진 받아오기 및 변수 설정 */
-		String photo = multipartRequest.getFilesystemName("fName")==null?"noimage.jpg":multipartRequest.getFilesystemName("fName");
-		
-		String mid = multipartRequest.getParameter("mid")==null ? "" : multipartRequest.getParameter("mid");
-		String pwd = multipartRequest.getParameter("pwd")==null ? "" : multipartRequest.getParameter("pwd");
-		String nickName = multipartRequest.getParameter("nickName")==null ? "" : multipartRequest.getParameter("nickName");
-		String name = multipartRequest.getParameter("name")==null ? "" : multipartRequest.getParameter("name");
-		String gender = multipartRequest.getParameter("gender")==null ? "" : multipartRequest.getParameter("gender");
-		String birthday = multipartRequest.getParameter("birthday")==null ? "" : multipartRequest.getParameter("birthday");
-		String tel = multipartRequest.getParameter("tel")==null ? "" : multipartRequest.getParameter("tel");
-		String address = multipartRequest.getParameter("address")==null ? "" : multipartRequest.getParameter("address");
-		String email = multipartRequest.getParameter("email")==null ? "" : multipartRequest.getParameter("email");
-		String homePage = multipartRequest.getParameter("homePage")==null ? "" : multipartRequest.getParameter("homePage");
-		String job = multipartRequest.getParameter("job")==null ? "" : multipartRequest.getParameter("job");
-		//String photo = multipartRequest.getParameter("filesystemName")==null ? "" : multipartRequest.getParameter("filesystemName");
-		String content = multipartRequest.getParameter("content")==null ? "" : multipartRequest.getParameter("content");
-		String userInfor = multipartRequest.getParameter("userInfor")==null ? "" : multipartRequest.getParameter("userInfor");
-		
-//		취미 전송에 대한 처리(여러개가 올수 있기에 배열로 받고 문자열 형변환 처리)
-		String[] hobbys = multipartRequest.getParameterValues("hobby");
-		String hobby = "";
-		if(hobbys.length != 0) {
-			for(String h : hobbys) {
-				hobby += h + "/";
-			}
-		}
-		hobby = hobby.substring(0,hobby.lastIndexOf("/"));
+		String mid = request.getParameter("mid")==null ? "" : request.getParameter("mid");
+		String pwd = request.getParameter("pwd")==null ? "" : request.getParameter("pwd");
+		String nickName = request.getParameter("nickName")==null ? "" : request.getParameter("nickName");
+		String name = request.getParameter("name")==null ? "" : request.getParameter("name");
+		String gender = request.getParameter("gender")==null ? "" : request.getParameter("gender");
+		String birthday = request.getParameter("birthday")==null ? "" : request.getParameter("birthday");
+		String tel = request.getParameter("tel")==null ? "" : request.getParameter("tel");
+		String address = request.getParameter("address")==null ? "" : request.getParameter("address");
+		String email = request.getParameter("email")==null ? "" : request.getParameter("email");
 		
 //		아이디, 닉네임 중복 Back End 체크
 		MemberDAO dao = new MemberDAO();
@@ -86,12 +60,6 @@ public class MemberJoinOkCommand implements MemberInterface {
 		vo.setTel(tel);
 		vo.setAddress(address);
 		vo.setEmail(email);
-		vo.setHomePage(homePage);
-		vo.setJob(job);
-		vo.setHobby(hobby);
-		vo.setPhoto(photo);
-		vo.setContent(content);
-		vo.setUserInfor(userInfor);
 
 //		회원 가입
 		int res = dao.setMemberJoinOk(vo);

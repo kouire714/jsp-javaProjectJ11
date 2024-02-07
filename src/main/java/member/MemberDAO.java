@@ -60,14 +60,7 @@ public class MemberDAO {
 				vo.setTel(rs.getString("tel"));
 				vo.setAddress(rs.getString("address"));
 				vo.setEmail(rs.getString("email"));
-				vo.setHomePage(rs.getString("homePage"));
-				vo.setJob(rs.getString("job"));
-				vo.setHobby(rs.getString("hobby"));
-				vo.setPhoto(rs.getString("photo"));
-				vo.setContent(rs.getString("content"));
-				vo.setUserInfor(rs.getString("userInfor"));
 				vo.setUserDel(rs.getString("userDel"));
-				vo.setPoint(rs.getInt("point"));
 				vo.setLevel(rs.getInt("level"));
 				vo.setVisitCnt(rs.getInt("visitCnt"));
 				vo.setStartDate(rs.getString("startDate"));
@@ -102,14 +95,7 @@ public class MemberDAO {
 				vo.setTel(rs.getString("tel"));
 				vo.setAddress(rs.getString("address"));
 				vo.setEmail(rs.getString("email"));
-				vo.setHomePage(rs.getString("homePage"));
-				vo.setJob(rs.getString("job"));
-				vo.setHobby(rs.getString("hobby"));
-				vo.setPhoto(rs.getString("photo"));
-				vo.setContent(rs.getString("content"));
-				vo.setUserInfor(rs.getString("userInfor"));
 				vo.setUserDel(rs.getString("userDel"));
-				vo.setPoint(rs.getInt("point"));
 				vo.setLevel(rs.getInt("level"));
 				vo.setVisitCnt(rs.getInt("visitCnt"));
 				vo.setStartDate(rs.getString("startDate"));
@@ -128,7 +114,7 @@ public class MemberDAO {
 	public int setMemberJoinOk(MemberVO vo) {
 		int res = 0;
 		try {
-			sql = "insert into member values (default,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default,default,default,default,default,default,default)";
+			sql = "insert into member values (default,?,?,?,?,?,?,?,?,?,default,default,default,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getMid());
 			pstmt.setString(2, vo.getPwd());
@@ -139,12 +125,6 @@ public class MemberDAO {
 			pstmt.setString(7, vo.getTel());
 			pstmt.setString(8, vo.getAddress());
 			pstmt.setString(9, vo.getEmail());
-			pstmt.setString(10, vo.getHomePage());
-			pstmt.setString(11, vo.getJob());
-			pstmt.setString(12, vo.getHobby());
-			pstmt.setString(13, vo.getPhoto());
-			pstmt.setString(14, vo.getContent());
-			pstmt.setString(15, vo.getUserInfor());
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("sql오류 : " + e.getMessage());
@@ -154,15 +134,13 @@ public class MemberDAO {
 		return res;
 	}
 
-//	로그인 성공시 처리할 내용들 업데이트
+//	로그인 마지막 방문일, 오늘 방문횟수, 전체 방문횟수 갱신
 	public void setLoginUpdate(MemberVO vo) {
 		try {
-			sql = "update member set point=?, lastDate=now(), todayCnt=?, level=?, visitCnt=visitCnt+1 where mid = ?";
+			sql = "update member set lastDate=now(), todayCnt=?, visitCnt=visitCnt+1 where mid = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, vo.getPoint());
-			pstmt.setInt(2, vo.getTodayCnt());
-			pstmt.setInt(3, vo.getLevel());
-			pstmt.setString(4, vo.getMid());
+			pstmt.setInt(1, vo.getTodayCnt());
+			pstmt.setString(2, vo.getMid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("sql구문 오류 : " + e.getMessage());

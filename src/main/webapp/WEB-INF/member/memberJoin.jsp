@@ -19,13 +19,12 @@
     /* 회원가입확인 */
     function fCheck() {
     	
-    	/* 유효성 검사 정규식(아이디, 비밀번호, 닉네임, 성명, 이메일, 홈페이지, 전화번호) */
+    	/* 유효성 검사 정규식(아이디, 비밀번호, 닉네임, 성명, 이메일, 전화번호) */
     	let regMid = /^[a-zA-Z0-9_]{4,20}$/;
     	let regPwd = /(?=.*[0-9a-zA-Z]).{4,20}$/;
       	let regNickName = /^[가-힣]+$/;
       	let regName = /^[가-힣a-zA-Z]+$/;
       	let regEmail =/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-      	let regURL = /^(https?:\/\/)?([a-z\d\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/;
     	let regTel = /\d{2,3}-\d{3,4}-\d{4}$/g;
     	
     	/* 유효성검사를 위한 폼데이터 변수처리 */
@@ -36,7 +35,6 @@
     	let email1 = myform.email1.value.trim();
     	let email2 = myform.email2.value;
     	let email = email1 + "@" + email2;
-    	let homePage = myform.homePage.value;
     	let tel1 = myform.tel1.value;
     	let tel2 = myform.tel2.value.trim();
     	let tel3 = myform.tel3.value.trim();
@@ -70,15 +68,8 @@
 			alert("이메일 형식에 맞지않습니다.");
 			myform.email1.focus();
 			return false;
-		}
-		else if((homePage != "http://" && homePage != "")) {
-			if(!regURL.test(homePage)) {
-			 alert("작성하신 홈페이지 주소가 URL 형식에 맞지않습니다.");
-			 myform.homePage.focus();
-			 return false;
-			 }
 			else {
-			submitFlag = 1;
+				submitFlag = 1;
 			}
 		}
     	
@@ -222,6 +213,11 @@
           <input type="radio" class="form-check-input" name="gender" value="여자">여자
         </label>
       </div>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="gender" value="NO">선택안함
+        </label>
+      </div>
     </div>
     <div class="form-group">
       <label for="birthday">생일</label>
@@ -265,94 +261,10 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
-      <label for="homepage">Homepage address:</label>
-      <input type="text" class="form-control" name="homePage" value="http://" placeholder="홈페이지를 입력하세요." id="homePage"/>
-    </div>
-    <div class="form-group">
-      <label for="name">직업</label>
-      <select class="form-control" id="job" name="job">
-        <!-- <option value="">직업선택</option> -->
-        <option>학생</option>
-        <option>회사원</option>
-        <option>공무원</option>
-        <option>군인</option>
-        <option>의사</option>
-        <option>법조인</option>
-        <option>세무인</option>
-        <option>자영업</option>
-        <option selected>기타</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <div class="form-check-inline">
-        <span class="input-group-text">취미</span> &nbsp; &nbsp;
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" value="등산" name="hobby"/>등산
-        </label>
-      </div>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" value="낚시" name="hobby"/>낚시
-        </label>
-      </div>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" value="수영" name="hobby"/>수영
-        </label>
-      </div>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" value="독서" name="hobby"/>독서
-        </label>
-      </div>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" value="영화감상" name="hobby"/>영화감상
-        </label>
-      </div>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" value="바둑" name="hobby"/>바둑
-        </label>
-      </div>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" value="축구" name="hobby"/>축구
-        </label>
-      </div>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" value="기타" name="hobby" checked/>기타
-        </label>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="content">자기소개</label>
-      <textarea rows="5" class="form-control" id="content" name="content" placeholder="자기소개를 입력하세요."></textarea>
-    </div>
-    <div class="form-group">
-      <div class="form-check-inline">
-        <span class="input-group-text">정보공개</span>  &nbsp; &nbsp;
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="userInfor" value="공개" checked/>공개
-        </label>
-      </div>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="userInfor" value="비공개"/>비공개
-        </label>
-      </div>
-    </div>
-    <div  class="form-group">
-      회원 사진(파일용량:2MByte이내) :
-      <input type="file" name="fName" id="file" class="form-control-file border"/>
-    </div>
     <!-- 회원가입확인 -->
     <button type="button" class="btn btn-secondary" onclick="fCheck()">회원가입</button> &nbsp;
     <button type="reset" class="btn btn-secondary">다시작성</button> &nbsp;
     <button type="button" class="btn btn-secondary" onclick="location.href='${ctp}/MemberLogin.mem';">돌아가기</button>
-    
     <!-- 이메일, 전화번호, 주소 통합 처리  -->
     <input type="hidden" name="email" />
     <input type="hidden" name="tel" />
